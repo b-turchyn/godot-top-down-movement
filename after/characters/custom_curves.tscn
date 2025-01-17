@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://byl81krqjqgy"]
+
+[ext_resource type="Script" path="res://characters/custom_curves.gd" id="1_3gm8g"]
+
+[sub_resource type="Curve" id="Curve_6jwk5"]
+_data = [Vector2(0.240838, 0.402424), 0.0, -5.46475, 0, 0, Vector2(0.324607, 0.0144509), 0.0, 0.0, 0, 0, Vector2(0.437173, 0.0144509), 0.0, 0.0, 0, 0, Vector2(0.76178, 1), 4.53885, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_hwmap"]
+min_value = 0.1
+_data = [Vector2(0, 0.162428), 0.0, 3.17965, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jf4b8"]
+size = Vector2(64, 64)
+
+[node name="CustomCurves" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_3gm8g")
+acceleration_curve = SubResource("Curve_6jwk5")
+deceleration_curve = SubResource("Curve_hwmap")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jf4b8")
