@@ -1,6 +1,6 @@
 # Top-Down, 2D Movement in Godot
 
-These are exercise files to accompany my YouTube video. Use the "before"
+These are exercise files to accompany [my YouTube video](https://youtu.be/m71-kZgYXlw). Use the "before"
 project to start, and "after" to see my implementations.
 
 ## License
