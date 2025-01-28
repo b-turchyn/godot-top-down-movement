@@ -17,8 +17,8 @@ func _ready():
 	chart.set_y_domain(0.0, 200.0)
 	chart.x_labels_function = func (_x: Variant) -> String: return ""
 	
-	var x: PackedFloat32Array = PackedFloat32Array(_array_of_range(15 * 20, 0))
-	var y: Array = Array(_array_of_with(15 * 20, 0))
+	var x: PackedFloat32Array = PackedFloat32Array(_array_of_range(15 * Engine.physics_ticks_per_second, 0))
+	var y: Array = Array(_array_of_with(15 * Engine.physics_ticks_per_second, 0))
 	
 	# Let's customize the chart properties, which specify how the chart
 	# should look, plus some additional elements like labels, the scale, etc...
@@ -32,7 +32,7 @@ func _ready():
 	cp.y_label = "Speed"
 	cp.x_scale = 5
 	cp.y_scale = 10
-	cp.max_samples = 15 * 20 # 15 seconds of physics time
+	cp.max_samples = 15 * Engine.physics_ticks_per_second # 15 seconds of physics time
 	cp.interactive = false # false by default, it allows the chart to create a tooltip to show point values
 	# and interecept clicks on the plot
 	
@@ -62,7 +62,7 @@ func _ready():
 	# set_process(false)
 
 
-var new_val: float = 15.0 * 20.0
+var new_val: float = 15.0 * Engine.physics_ticks_per_second
 
 func _physics_process(_delta: float) -> void:
 	if !character: return
