@@ -10,7 +10,7 @@ extends CharacterBody2D
 @export var max_speed: float = 200.0
 
 func _physics_process(_delta: float) -> void:
-	velocity = _direction() # * max_speed
+	velocity = _direction() * max_speed
 	move_and_slide()
 
 func _direction() -> Vector2:
