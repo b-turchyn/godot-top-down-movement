@@ -7,11 +7,10 @@ extends CharacterBody2D
 @export var max_speed: float = 200.0
 ## This decides how much of the difference in current and target velocity we should be applying
 ## to the current velocity. A higher acceleration number means that we will apply a larger value.
-## Valid values are between 0.0 and 1.0.[br]
+## Valid values are between 0.0 and [member Engine.physics_ticks_per_second].[br]
 ## A value of [code]0.0[/code] means that you won't accelerate at all.
-## A value of [code]1.0[/code] means that you'll accelerate instantaneously.
-@export var acceleration_coefficient: float = .05
-
+## A value of [member Engine.physics_ticks_per_second] means that you'll accelerate instantaneously.
+@export var acceleration_coefficient: float = 3.0
 
 func _physics_process(delta: float) -> void:
 	var direction: Vector2 = _direction()
@@ -20,8 +19,10 @@ func _physics_process(delta: float) -> void:
 	# (target_velocity - velocity) gives us the difference between the top velocity and the
 	# current velocity. The bigger the difference between these, the faster we accelerate or
 	# decelerate. The closer we get to the target velocity, the slower we accelerate. 
-	# When our direction is zero (i.e. no acceleration), then our target velocity is also zero.
-	velocity += (target_velocity - velocity) * acceleration_coefficient
+	# When our direction is zero, then our target velocity is also zero.
+	velocity += (target_velocity - velocity) * acceleration_coefficient * delta
+	# I'm not completely convinced that we needed that multiplication by delta. I think all
+	# we did was raise the maximum value of acceleration_coefficient up to the tickrate.
 	_adjust_velocity(direction)
 	velocity = velocity.limit_length(max_speed)
 	
